@@ -15,6 +15,8 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
+      with:
+        fetch-depth: 0   # Ensure that the full history is fetched (not just the latest commit)
 
     - name: Set up Python
       uses: actions/setup-python@v2
@@ -28,7 +30,7 @@ jobs:
 
     - name: Build Docker image
       run: |
-        docker build -t k8steamcontainerregistry.azurecr.io/sample-web-app:${{ github.sha }} .
+        docker build --no-cache -t k8steamcontainerregistry.azurecr.io/sample-web-app:${{ github.sha }} .
 
     - name: Log in to Azure Container Registry
       uses: azure/docker-login@v1
@@ -78,3 +80,7 @@ jobs:
     - name: Force rollout restart of the deployment
       run: |
         kubectl rollout restart deployment/sample-web-app
+
+    - name: Verify deployment
+      run: |
+        kubectl get deployment sample-web-app -o yaml
