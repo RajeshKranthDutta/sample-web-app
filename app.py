@@ -8,7 +8,7 @@ def home():
 
 @app.route('/about')
 def about():
-    # Simple logic to simulate some additional feature
+    # Simple #logic to simulate some additional feature
     return "This is a sample web app built to demonstrate Flask functionality."
 
 @app.route('/new-feature')
