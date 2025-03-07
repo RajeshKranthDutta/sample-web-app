@@ -14,6 +14,6 @@ spec:
     spec:
       containers:
       - name: sample-web-app
-        image: k8steamcontainerregistry.azurecr.io/sample-web-app:v1
+        image: k8steamcontainerregistry.azurecr.io/sample-web-app:{{ image_tag }}  # Placeholder
         ports:
         - containerPort: 5000
